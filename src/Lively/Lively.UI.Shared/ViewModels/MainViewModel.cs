@@ -264,6 +264,7 @@ namespace Lively.UI.Shared.ViewModels
                 ContentPageType.settingsWallpaper => true,
                 ContentPageType.settingsSystem => true,
                 ContentPageType.settingsScreensaver => true,
+                ContentPageType.settingsLockscreen => true,
                 _ => throw new NotImplementedException(),
             };
             // Update selection UI if navigation is called by code.
@@ -587,6 +588,7 @@ namespace Lively.UI.Shared.ViewModels
                 new() { Name = GetPageName(ContentPageType.settingsPerformance), PageType = ContentPageType.settingsPerformance },
                 new() { Name = GetPageName(ContentPageType.settingsWallpaper), PageType = ContentPageType.settingsWallpaper },
                 new() { Name = GetPageName(ContentPageType.settingsScreensaver), PageType = ContentPageType.settingsScreensaver },
+                new() { Name = GetPageName(ContentPageType.settingsLockscreen), PageType = ContentPageType.settingsLockscreen },
                 new() { Name = GetPageName(ContentPageType.settingsSystem), PageType = ContentPageType.settingsSystem }
             ];
         }
@@ -604,6 +606,7 @@ namespace Lively.UI.Shared.ViewModels
                 ContentPageType.settingsPerformance => i18n.GetString("TitlePerformance"),
                 ContentPageType.settingsWallpaper => i18n.GetString("TitleWallpaper/Content"),
                 ContentPageType.settingsScreensaver => i18n.GetString("TitleScreensaver/Content"),
+                ContentPageType.settingsLockscreen => i18n.GetString("TitleLockscreen/Content"),
                 ContentPageType.settingsSystem => i18n.GetString("System/Text"),
                 _ => throw new NotImplementedException(),
             };

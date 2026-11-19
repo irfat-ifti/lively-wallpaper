@@ -287,6 +287,14 @@ namespace Lively.Grpc.Client
                     }
                 },
                 RestartAfterLockscreen = settings.IsRestartAfterLockscreen,
+                LockScreenEnabled = settings.LockScreenEnabled,
+                LockScreenType = (ScreensaverTypeRule)settings.LockScreenType,
+                LockScreenArrangement = (WallpaperArrangementRule)settings.LockScreenArrangement,
+                LockScreenIdleWait = (Grpc.Common.Proto.Settings.ScreensaverIdleTime)((uint)settings.LockScreenIdleDelay),
+                LockScreenVolumeGlobal = settings.LockScreenGlobalVolume,
+                LockScreenFadeIn = settings.LockScreenFadeIn,
+                LockScreenShowClock = settings.LockScreenShowClock,
+                LockScreenSyncWindowsLockImage = settings.LockScreenSyncWindowsLockImage,
             };
         }
 
@@ -403,6 +411,14 @@ namespace Lively.Grpc.Client
                         settings.SelectedAudioOutputDisplay.WorkingArea.Height),
                 },
                 IsRestartAfterLockscreen = settings.RestartAfterLockscreen,
+                LockScreenEnabled = settings.LockScreenEnabled,
+                LockScreenType = (Models.Enums.LockScreenType)settings.LockScreenType,
+                LockScreenArrangement = (WallpaperArrangement)settings.LockScreenArrangement,
+                LockScreenIdleDelay = (Models.Enums.ScreensaverIdleTime)((int)settings.LockScreenIdleWait),
+                LockScreenGlobalVolume = settings.LockScreenVolumeGlobal,
+                LockScreenFadeIn = settings.LockScreenFadeIn,
+                LockScreenShowClock = settings.LockScreenShowClock,
+                LockScreenSyncWindowsLockImage = settings.LockScreenSyncWindowsLockImage,
             };
         }
 

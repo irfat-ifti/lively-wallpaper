@@ -64,6 +64,31 @@ namespace Lively.Grpc.Client
             });
         }
 
+        public async Task ShowLockscreen(bool isFadeIn)
+        {
+            await client.LockscreenAsync(new LockscreenRequest()
+            {
+                State = LockscreenState.LockscreenStart,
+                FadeIn = isFadeIn
+            });
+        }
+
+        public async Task StopLockscreen()
+        {
+            await client.LockscreenAsync(new LockscreenRequest()
+            {
+                State = LockscreenState.LockscreenStop
+            });
+        }
+
+        public async Task SyncLockscreenImage()
+        {
+            await client.LockscreenAsync(new LockscreenRequest()
+            {
+                State = LockscreenState.LockscreenSync
+            });
+        }
+
         public async Task ScreensaverConfigure()
         {
             await client.ScreensaverAsync(new ScreensaverRequest()

@@ -47,6 +47,7 @@ namespace Lively.UI.WinUI.Services
                 ContentPageType.settingsGeneral => typeof(SettingsGeneralView),
                 ContentPageType.settingsPerformance => typeof(SettingsPerformanceView),
                 ContentPageType.settingsScreensaver => typeof(SettingsScreensaverView),
+                ContentPageType.settingsLockscreen => typeof(SettingsLockscreenView),
                 ContentPageType.settingsWallpaper => typeof(SettingsWallpaperView),
                 ContentPageType.settingsSystem => typeof(SettingsSystemView),
                 _ => throw new NotImplementedException(),

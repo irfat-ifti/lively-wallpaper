@@ -4,5 +4,6 @@ public enum DialogPageType
 {
     controlPanelWallpaper,
     controlPanelScreensaver,
+    controlPanelLockscreen,
     controlPanelCustomise
 }

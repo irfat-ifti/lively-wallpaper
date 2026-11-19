@@ -227,6 +227,7 @@ namespace Lively
                 .AddSingleton<IWatchdogService, WatchdogProcess>()
                 .AddSingleton<IDisplayManager, DisplayManager>()
                 .AddSingleton<IScreensaverService, ScreensaverService>()
+                .AddSingleton<ILockscreenService, LockscreenService>()
                 .AddSingleton<IPlayback, Playback>()
                 .AddSingleton<IRunnerService, RunnerService>()
                 .AddSingleton<ISystray, Systray>()

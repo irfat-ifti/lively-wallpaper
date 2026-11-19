@@ -17,15 +17,18 @@ namespace Lively.RPC
         private readonly IRunnerService runner;
         private readonly IWindowService windowService;
         private readonly IScreensaverService screensaver;
+        private readonly ILockscreenService lockscreen;
         private readonly ICommandHandler commandHandler;
 
         public CommandsServer(IRunnerService runner,
             IScreensaverService screensaver,
+            ILockscreenService lockscreen,
             IWindowService windowService,
             ICommandHandler commandHandler)
         {
             this.runner = runner;
             this.screensaver = screensaver;
+            this.lockscreen = lockscreen;
             this.windowService = windowService;
             this.commandHandler = commandHandler;
         }
@@ -82,6 +85,23 @@ namespace Lively.RPC
                 case ScreensaverState.Configure:
                     //TODO: Open control panel or cutomise panel
                     runner.ShowUI();
+                    break;
+            }
+            return await Task.FromResult(new Empty());
+        }
+
+        public override async Task<Empty> Lockscreen(LockscreenRequest request, ServerCallContext context)
+        {
+            switch (request.State)
+            {
+                case LockscreenState.LockscreenStart:
+                    await lockscreen.StartAsync(request.FadeIn);
+                    break;
+                case LockscreenState.LockscreenStop:
+                    await lockscreen.StopAsync();
+                    break;
+                case LockscreenState.LockscreenSync:
+                    await lockscreen.SyncLockScreenImageAsync();
                     break;
             }
             return await Task.FromResult(new Empty());

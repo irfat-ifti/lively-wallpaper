@@ -119,6 +119,14 @@ namespace Lively.Models
         public int ScreensaverGracePeriod { get; set; }
         public int ScreensaverLockWaitTimeout { get; set; }
         public bool ScreensaverAudioIdleCheck { get; set; }
+        public bool LockScreenEnabled { get; set; }
+        public LockScreenType LockScreenType { get; set; }
+        public WallpaperArrangement LockScreenArrangement { get; set; }
+        public ScreensaverIdleTime LockScreenIdleDelay { get; set; }
+        public int LockScreenGlobalVolume { get; set; }
+        public bool LockScreenFadeIn { get; set; }
+        public bool LockScreenShowClock { get; set; }
+        public bool LockScreenSyncWindowsLockImage { get; set; }
         public bool KeepAwakeUI { get; set; }
         public bool RememberSelectedScreen { get; set; }
         public bool IsUpdated { get; set; }
@@ -153,6 +161,14 @@ namespace Lively.Models
             ScreensaverGracePeriod = 5;
             ScreensaverLockWaitTimeout = 5;
             ScreensaverAudioIdleCheck = true;
+            LockScreenEnabled = true;
+            LockScreenType = LockScreenType.wallpaper;
+            LockScreenArrangement = WallpaperArrangement.per;
+            LockScreenIdleDelay = ScreensaverIdleTime.none;
+            LockScreenGlobalVolume = 0;
+            LockScreenFadeIn = false;
+            LockScreenShowClock = true;
+            LockScreenSyncWindowsLockImage = true;
             AppVersion = System.Reflection.Assembly.GetEntryAssembly().GetName().Version.ToString();
             AppPreviousVersion = string.Empty;
             Startup = true;

@@ -817,6 +817,9 @@ If still not working, close &amp; start Lively again/restart windows.
   <data name="TitleScreensaver.Content" xml:space="preserve">
     <value>Screensaver</value>
   </data>
+  <data name="TitleLockscreen.Content" xml:space="preserve">
+    <value>Lock Screen</value>
+  </data>
   <data name="TitleSelectFile" xml:space="preserve">
     <value>Select File</value>
   </data>
@@ -1270,6 +1273,45 @@ If still not working, close &amp; start Lively again/restart windows.
   </data>
   <data name="ScreensaverDialogSettings.Header" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="Lockscreen.Description" xml:space="preserve">
+    <value>How live wallpaper is applied to connected display devices on lock screen</value>
+  </data>
+  <data name="Lockscreen.Header" xml:space="preserve">
+    <value>Type of lock screen wallpaper</value>
+  </data>
+  <data name="LockscreenModeDifferentWallpaper.Text" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="LockscreenModeSameWallpaper.Text" xml:space="preserve">
+    <value>Mirror Wallpaper</value>
+  </data>
+  <data name="LockscreenDialogSettings.Header" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="LockscreenEnable.Header" xml:space="preserve">
+    <value>Enable Live Lock Screen</value>
+  </data>
+  <data name="LockscreenWaitTime.Header" xml:space="preserve">
+    <value>After the inactivity period start live lock screen</value>
+  </data>
+  <data name="LockscreenShowClock.Header" xml:space="preserve">
+    <value>Display clock and date overlay</value>
+  </data>
+  <data name="LockscreenFadeIn.Header" xml:space="preserve">
+    <value>Fade to black before start</value>
+  </data>
+  <data name="LockscreenSyncWindowsLockImage.Header" xml:space="preserve">
+    <value>Sync with Windows Lock Screen</value>
+  </data>
+  <data name="LockscreenSyncWindowsLockImage.Description" xml:space="preserve">
+    <value>Automatically update Windows native lock screen image from your dual monitor live wallpapers</value>
+  </data>
+  <data name="LockscreenPreview.Header" xml:space="preserve">
+    <value>Preview Lock Screen</value>
+  </data>
+  <data name="LockscreenWindowsSettings.Header" xml:space="preserve">
+    <value>Windows Lock Screen Settings</value>
   </data>
   <data name="DisplayAudioPauseRule.Header" xml:space="preserve">
     <value>Output</value>

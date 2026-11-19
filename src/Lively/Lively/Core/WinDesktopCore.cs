@@ -60,6 +60,11 @@ namespace Lively.Core
         private readonly uint screensaverIdleCheckTime = 30000;
         private uint screensaverIdleWaitTime = 300000;
 
+        // Lockscreen
+        private readonly Timer lockscreenIdleTimer = new();
+        private readonly uint lockscreenIdleCheckTime = 30000;
+        private uint lockscreenIdleWaitTime = 300000;
+
         private readonly IUserSettingsService userSettings;
         private readonly IWallpaperPluginFactory wallpaperFactory;
         private readonly IWallpaperLibraryFactory wallpaperLibraryFactory;
@@ -67,6 +72,7 @@ namespace Lively.Core
         private readonly IWatchdogService watchdog;
         private readonly IPlayback playback;
         private readonly IScreensaverService screensaver;
+        private readonly ILockscreenService lockscreen;
         private readonly RawInputMsgWindow rawInput;
         private readonly WndProcMsgWindow WndProc;
         private readonly IDisplayManager displayManager;
@@ -77,6 +83,7 @@ namespace Lively.Core
             ITransparentTbService ttbService,
             IPlayback playback,
             IScreensaverService screensaver,
+            ILockscreenService lockscreen,
             IWatchdogService watchdog,
             RawInputMsgWindow rawInput,
             WndProcMsgWindow wndProc,
@@ -92,6 +99,7 @@ namespace Lively.Core
             this.rawInput = rawInput;
             this.WndProc = wndProc;
             this.screensaver = screensaver;
+            this.lockscreen = lockscreen;
             this.wallpaperFactory = wallpaperFactory;
             this.wallpaperLibraryFactory = wallpaperLibraryFactory;
 
@@ -114,6 +122,7 @@ namespace Lively.Core
             this.rawInput.MouseUpRaw += RawInput_MouseUpRaw;
             this.rawInput.KeyboardClickRaw += RawInput_KeyboardClickRaw;
             this.screensaverIdleTimer.Elapsed += ScreensaverIdleTimer_Elapsed;
+            this.lockscreenIdleTimer.Elapsed += LockscreenIdleTimer_Elapsed;
 
             // Initialize desktop and update handles.
             SetupDesktopLayer();
@@ -142,6 +151,11 @@ namespace Lively.Core
             screensaverIdleTimer.Interval = screensaverIdleCheckTime;
             if (userSettings.Settings.ScreensaverIdleDelay != ScreensaverIdleTime.none)
                 StartScreensaverIdleTimer(userSettings.Settings.ScreensaverIdleDelay.ToMilliseconds());
+
+            // Lockscreen
+            lockscreenIdleTimer.Interval = lockscreenIdleCheckTime;
+            if (userSettings.Settings.LockScreenIdleDelay != ScreensaverIdleTime.none)
+                StartLockscreenIdleTimer(userSettings.Settings.LockScreenIdleDelay.ToMilliseconds());
         }
 
         private void SetupDesktopLayer()
@@ -1349,6 +1363,49 @@ namespace Lively.Core
             }
         }
 
+        public void StartLockscreenIdleTimer(uint idleTime)
+        {
+            if (idleTime == 0)
+            {
+                StopLockscreenIdleTimer();
+            }
+            else
+            {
+                Logger.Info("Starting lockscreen idle wait {0}ms..", idleTime);
+                lockscreenIdleWaitTime = idleTime;
+                lockscreenIdleTimer.Start();
+            }
+        }
+
+        public void StopLockscreenIdleTimer()
+        {
+            if (lockscreenIdleTimer.Enabled)
+            {
+                Logger.Info("Stopping lockscreen idle wait..");
+                lockscreenIdleTimer.Stop();
+            }
+        }
+
+        private async void LockscreenIdleTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            try
+            {
+                if (SystemIdleUtil.GetLastInputTime() >= lockscreenIdleWaitTime
+                    && !SystemIdleUtil.IsExclusiveFullScreenAppRunning()
+                    && !await SystemIdleUtil.IsSmtcPlayingAsync())
+                {
+                    if (userSettings.Settings.LockScreenEnabled)
+                    {
+                        await lockscreen.StartAsync(userSettings.Settings.LockScreenFadeIn);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
+            }
+        }
+
         private bool IsDesktop()
         {
             IntPtr hWnd = NativeMethods.GetForegroundWindow();
@@ -1373,6 +1430,7 @@ namespace Lively.Core
                     WallpaperChanged -= SetupDesktop_WallpaperChanged;
                     workerWHook?.Dispose();
                     screensaverIdleTimer?.Dispose();
+                    lockscreenIdleTimer?.Dispose();
                     CloseAllWallpapers(false);
                     RefreshDesktop();
 

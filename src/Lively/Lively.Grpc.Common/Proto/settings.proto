@@ -84,6 +84,14 @@ message SettingsDataModel {
     GetScreensResponse selected_audio_output_display = 72;
     string visualizer_audio_device_id = 73;
     bool restart_after_lockscreen = 74;
+    bool lock_screen_enabled = 75;
+    ScreensaverTypeRule lock_screen_type = 76;
+    WallpaperArrangementRule lock_screen_arrangement = 77;
+    ScreensaverIdleTime lock_screen_idle_wait = 78;
+    int32 lock_screen_volume_global = 79;
+    bool lock_screen_fade_in = 80;
+    bool lock_screen_show_clock = 81;
+    bool lock_screen_sync_windows_lock_image = 82;
 }
 
 message AppRulesSettings {

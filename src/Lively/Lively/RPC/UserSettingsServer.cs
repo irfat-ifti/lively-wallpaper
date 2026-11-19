@@ -206,6 +206,24 @@ namespace Lively.RPC
             userSettings.Settings.SelectedAudioOutputDisplay = displayManager.DisplayMonitors.FirstOrDefault(x => req.SelectedAudioOutputDisplay.DeviceId == x.DeviceId) ?? displayManager.PrimaryDisplayMonitor;
             userSettings.Settings.IsRestartAfterLockscreen = req.RestartAfterLockscreen;
 
+            if ((Models.Enums.ScreensaverIdleTime)((int)req.LockScreenIdleWait) != userSettings.Settings.LockScreenIdleDelay)
+            {
+                userSettings.Settings.LockScreenIdleDelay = (Models.Enums.ScreensaverIdleTime)((int)req.LockScreenIdleWait);
+
+                if (userSettings.Settings.LockScreenIdleDelay == Models.Enums.ScreensaverIdleTime.none)
+                    desktopCore.StopLockscreenIdleTimer();
+                else
+                    desktopCore.StartLockscreenIdleTimer(userSettings.Settings.LockScreenIdleDelay.ToMilliseconds());
+            }
+
+            userSettings.Settings.LockScreenEnabled = req.LockScreenEnabled;
+            userSettings.Settings.LockScreenType = (LockScreenType)req.LockScreenType;
+            userSettings.Settings.LockScreenArrangement = (WallpaperArrangement)req.LockScreenArrangement;
+            userSettings.Settings.LockScreenGlobalVolume = req.LockScreenVolumeGlobal;
+            userSettings.Settings.LockScreenFadeIn = req.LockScreenFadeIn;
+            userSettings.Settings.LockScreenShowClock = req.LockScreenShowClock;
+            userSettings.Settings.LockScreenSyncWindowsLockImage = req.LockScreenSyncWindowsLockImage;
+
             try
             {
                 return Task.FromResult(new Empty());
@@ -345,6 +363,14 @@ namespace Lively.RPC
                     }
                 },
                 RestartAfterLockscreen = settings.IsRestartAfterLockscreen,
+                LockScreenEnabled = settings.LockScreenEnabled,
+                LockScreenType = (ScreensaverTypeRule)settings.LockScreenType,
+                LockScreenArrangement = (WallpaperArrangementRule)settings.LockScreenArrangement,
+                LockScreenIdleWait = (Grpc.Common.Proto.Settings.ScreensaverIdleTime)((uint)settings.LockScreenIdleDelay),
+                LockScreenVolumeGlobal = settings.LockScreenGlobalVolume,
+                LockScreenFadeIn = settings.LockScreenFadeIn,
+                LockScreenShowClock = settings.LockScreenShowClock,
+                LockScreenSyncWindowsLockImage = settings.LockScreenSyncWindowsLockImage,
             };
             return Task.FromResult(resp);
         }

@@ -313,6 +313,12 @@
     <Page Update="Views\Pages\ControlPanel\ScreensaverLayoutView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Update="Views\Pages\ControlPanel\LockscreenLayoutView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Views\Pages\Settings\SettingsLockscreenView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="Views\Pages\ControlPanel\WallpaperLayoutView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

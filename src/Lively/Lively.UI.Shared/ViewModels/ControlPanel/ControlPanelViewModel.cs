@@ -12,26 +12,31 @@ namespace Lively.UI.Shared.ViewModels
     {
         public WallpaperLayoutViewModel WallpaperVm { get; }
         public ScreensaverLayoutViewModel ScreensaverVm { get; }
+        public LockscreenLayoutViewModel LockscreenVm { get; }
         private readonly IDialogNavigator dialogNavigator;
 
         public ControlPanelViewModel(WallpaperLayoutViewModel wallpaperVm,
             ScreensaverLayoutViewModel screensaverVm,
+            LockscreenLayoutViewModel lockscreenVm,
             IDialogNavigator dialogNavigator,
             IResourceService i18n)
         {
             this.WallpaperVm = wallpaperVm;
             this.ScreensaverVm = screensaverVm;
+            this.LockscreenVm = lockscreenVm;
             this.dialogNavigator = dialogNavigator;
 
             MenuItems = [
                 new() { Name = i18n.GetString("TitleWallpaper/Content"), PageType = DialogPageType.controlPanelWallpaper},
                 new() { Name = i18n.GetString("TitleScreensaver/Content"), PageType = DialogPageType.controlPanelScreensaver },
+                new() { Name = i18n.GetString("TitleLockscreen/Content"), PageType = DialogPageType.controlPanelLockscreen },
                 new() { Name = i18n.GetString("TitleCustomise/Content"), PageType = DialogPageType.controlPanelCustomise, IsVisible = false }
             ];
             // SelectedMenuItem set in View Loaded event.
 
             this.WallpaperVm.PropertyChanged += WallpaperVm_PropertyChanged;
             this.ScreensaverVm.PropertyChanged += ScreensaverVm_PropertyChanged;
+            this.LockscreenVm.PropertyChanged += LockscreenVm_PropertyChanged;
             this.dialogNavigator.ContentPageChanged += DialogNavigator_ContentPageChanged;
         }
 
@@ -43,6 +48,9 @@ namespace Lively.UI.Shared.ViewModels
 
         [ObservableProperty]
         private bool isShowScreensaverSettings;
+
+        [ObservableProperty]
+        private bool isShowLockscreenSettings;
 
         [ObservableProperty]
         private ObservableCollection<DialogNavigationItem> menuItems;
@@ -74,11 +82,24 @@ namespace Lively.UI.Shared.ViewModels
                 IsShowScreensaverSettings = ScreensaverVm.IsShowSettings;
         }
 
+        private void LockscreenVm_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(LockscreenVm.IsHideDialog))
+                IsHideDialog = LockscreenVm.IsHideDialog;
+            else if (e.PropertyName == nameof(LockscreenVm.IsShowSettings))
+                IsShowLockscreenSettings = LockscreenVm.IsShowSettings;
+        }
+
         private void WallpaperVm_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if(e.PropertyName == nameof(WallpaperVm.SelectedWallpaperLayout))
+            {
                 ScreensaverVm.SelectedScreensaverArrangement = (ScreensaverType)ScreensaverVm.SelectedScreensaverTypeIndex != ScreensaverType.wallpaper ? 
                     ScreensaverVm.SelectedScreensaverArrangement : WallpaperVm.SelectedWallpaperLayout;
+
+                LockscreenVm.SelectedLockscreenArrangement = (LockScreenType)LockscreenVm.SelectedLockscreenTypeIndex != LockScreenType.wallpaper ?
+                    LockscreenVm.SelectedLockscreenArrangement : WallpaperVm.SelectedWallpaperLayout;
+            }
         }
 
         private void DialogNavigator_ContentPageChanged(object sender, DialogPageType pageType)
@@ -101,8 +122,10 @@ namespace Lively.UI.Shared.ViewModels
         {
             WallpaperVm?.OnWindowClosing();
             ScreensaverVm?.OnWindowClosing();
+            LockscreenVm?.OnWindowClosing();
 
             this.ScreensaverVm.PropertyChanged -= ScreensaverVm_PropertyChanged;
+            this.LockscreenVm.PropertyChanged -= LockscreenVm_PropertyChanged;
         }
     }
 }

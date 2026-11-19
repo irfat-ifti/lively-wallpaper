@@ -812,6 +812,9 @@ https://github.com/rocksdanister/lively/wiki</value>
   <data name="TitleScreensaver.Content" xml:space="preserve">
     <value>স্ক্রিনসেভার</value>
   </data>
+  <data name="TitleLockscreen.Content" xml:space="preserve">
+    <value>লক স্ক্রিন</value>
+  </data>
   <data name="TitleSelectFile" xml:space="preserve">
     <value>ফাইল নির্বাচন করুন</value>
   </data>
@@ -1265,6 +1268,45 @@ https://github.com/rocksdanister/lively/wiki</value>
   </data>
   <data name="ScreensaverDialogSettings.Header" xml:space="preserve">
     <value>সেটিংস সমূহ</value>
+  </data>
+  <data name="Lockscreen.Description" xml:space="preserve">
+    <value>লক স্ক্রিনে সংযুক্ত ডিসপ্লে ডিভাইসগুলোতে লাইভ ওয়ালপেপার যেভাবে প্রয়োগ হবে</value>
+  </data>
+  <data name="Lockscreen.Header" xml:space="preserve">
+    <value>লক স্ক্রিন ওয়ালপেপারের ধরন</value>
+  </data>
+  <data name="LockscreenModeDifferentWallpaper.Text" xml:space="preserve">
+    <value>কাস্টম</value>
+  </data>
+  <data name="LockscreenModeSameWallpaper.Text" xml:space="preserve">
+    <value>ওয়ালপেপার প্রতিফলিত করুন</value>
+  </data>
+  <data name="LockscreenDialogSettings.Header" xml:space="preserve">
+    <value>সেটিংস সমূহ</value>
+  </data>
+  <data name="LockscreenEnable.Header" xml:space="preserve">
+    <value>লাইভ লক স্ক্রিন সক্রিয় করুন</value>
+  </data>
+  <data name="LockscreenWaitTime.Header" xml:space="preserve">
+    <value>ইনএক্টিভিটি সময়সীমার পর লক স্ক্রিন চালু করুন</value>
+  </data>
+  <data name="LockscreenShowClock.Header" xml:space="preserve">
+    <value>ঘড়ি ও তারিখ প্রদর্শন করুন</value>
+  </data>
+  <data name="LockscreenFadeIn.Header" xml:space="preserve">
+    <value>শুরুর আগে কালো রঙে মিলিয়ে যান</value>
+  </data>
+  <data name="LockscreenSyncWindowsLockImage.Header" xml:space="preserve">
+    <value>উইন্ডোজ লক স্ক্রিনের সাথে সিন্ক করুন</value>
+  </data>
+  <data name="LockscreenSyncWindowsLockImage.Description" xml:space="preserve">
+    <value>ডুয়াল মনিটর লাইভ ওয়ালপেপার ফ্রেম উইন্ডোজের লক স্ক্রিন ব্যাকগ্রাউন্ড হিসেবে সেট করুন</value>
+  </data>
+  <data name="LockscreenPreview.Header" xml:space="preserve">
+    <value>লক স্ক্রিন প্রিভিউ</value>
+  </data>
+  <data name="LockscreenWindowsSettings.Header" xml:space="preserve">
+    <value>উইন্ডোজ লক স্ক্রিন সেটিংস</value>
   </data>
   <data name="DisplayAudioPauseRule.Header" xml:space="preserve">
     <value>আউটপুট</value>

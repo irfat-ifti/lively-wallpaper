@@ -1,0 +1,65 @@
+<Window
+    x:Class="Lively.Views.LockScreenWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Lively Lock Screen"
+    Background="Black"
+    Closing="Window_Closing"
+    Loaded="Window_Loaded"
+    ResizeMode="NoResize"
+    SizeChanged="Window_SizeChanged"
+    WindowStyle="None"
+    Topmost="True"
+    ShowInTaskbar="False"
+    mc:Ignorable="d">
+    <Grid>
+        <!-- Wallpaper video / web / canvas will be docked here -->
+        <Rectangle
+            x:Name="PreviewBorder"
+            MinWidth="99999"
+            MinHeight="99999"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Fill="Black" />
+
+        <!-- Lock Screen Clock & Status Overlay -->
+        <Grid x:Name="OverlayGrid" IsHitTestVisible="False">
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="70,0,0,80">
+                <TextBlock x:Name="TimeTextBlock"
+                           FontSize="88"
+                           FontWeight="SemiBold"
+                           FontFamily="Segoe UI Variable Display, Segoe UI, sans-serif"
+                           Foreground="White">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="16" ShadowDepth="3" Opacity="0.65" Direction="270"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="DateTextBlock"
+                           FontSize="28"
+                           FontWeight="Normal"
+                           FontFamily="Segoe UI Variable Text, Segoe UI, sans-serif"
+                           Foreground="#EEFFFFFF"
+                           Margin="6,-4,0,0">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="10" ShadowDepth="2" Opacity="0.65" Direction="270"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </StackPanel>
+
+            <TextBlock x:Name="PromptTextBlock"
+                       Text="Press any key to unlock"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Bottom"
+                       Margin="0,0,0,32"
+                       FontSize="18"
+                       FontFamily="Segoe UI, sans-serif"
+                       Foreground="#BBFFFFFF">
+                <TextBlock.Effect>
+                    <DropShadowEffect BlurRadius="8" ShadowDepth="2" Opacity="0.5" Direction="270"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </Grid>
+    </Grid>
+</Window>

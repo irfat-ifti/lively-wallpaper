@@ -19,6 +19,7 @@ namespace Lively.Common
             public static string AppRulesPath { get; } = Path.Combine(AppDataDir, "AppRules.json");
             public static string WallpaperLayoutPath { get; } = Path.Combine(AppDataDir, "WallpaperLayout.json");
             public static string ScreenSaverLayoutPath { get; } = Path.Combine(AppDataDir, "ScreenSaverLayout.json");
+            public static string LockScreenLayoutPath { get; } = Path.Combine(AppDataDir, "LockScreenLayout.json");
             public static string UserSettingsPath { get; } = Path.Combine(AppDataDir, "Settings.json");
             public static string MusicAppExclusionRulesPath { get; } = Path.Combine(AppDataDir, "MusicAppExclusionRules.json");
             public static string WeatherSettingsPath { get; } = Path.Combine(AppDataDir, "WeatherSettings.json");

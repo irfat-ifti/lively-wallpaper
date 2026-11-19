@@ -41,6 +41,7 @@ namespace Lively.UI.WinUI.Services
             {
                 DialogPageType.controlPanelWallpaper => typeof(WallpaperLayoutView),
                 DialogPageType.controlPanelScreensaver => typeof(ScreensaverLayoutView),
+                DialogPageType.controlPanelLockscreen => typeof(LockscreenLayoutView),
                 DialogPageType.controlPanelCustomise => typeof(WallpaperLayoutCustomiseView),
                 _ => throw new NotImplementedException(),
             };

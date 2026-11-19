@@ -9,6 +9,7 @@
         settingsPerformance,
         settingsWallpaper,
         settingsScreensaver,
+        settingsLockscreen,
         settingsSystem
     }
 }

@@ -30,6 +30,10 @@ namespace Lively.Core
         void StartScreensaverIdleTimer(uint idleTime);
         void StopScreensaverIdleTimer();
 
+        // Lockscreen
+        void StartLockscreenIdleTimer(uint idleTime);
+        void StopLockscreenIdleTimer();
+
         /// <summary>
         /// Wallpaper set/removed.
         /// </summary>
