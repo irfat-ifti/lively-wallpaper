@@ -27,10 +27,38 @@ jobs:
     - name: Build Lively Solution
       run: msbuild src/Lively/Lively.sln /p:Configuration=Release /p:Platform=x64
 
+    - name: Assemble Release Package
+      shell: pwsh
+      run: |
+        $dist = "dist"
+        New-Item -ItemType Directory -Force -Path "$dist\plugins\UI"
+        New-Item -ItemType Directory -Force -Path "$dist\plugins\wmf"
+        New-Item -ItemType Directory -Force -Path "$dist\plugins\cef"
+        New-Item -ItemType Directory -Force -Path "$dist\plugins\webview2"
+        New-Item -ItemType Directory -Force -Path "$dist\plugins\libvlc"
+
+        # Core Lively files
+        Copy-Item -Path "src/Lively/Lively/bin/x64/Release/net9.0-windows10.0.18362.0/*" -Destination "$dist" -Recurse -Force
+
+        # WinUI UI
+        Copy-Item -Path "src/Lively/Lively.UI.WinUI/bin/x64/Release/net9.0-windows10.0.22621.0/*" -Destination "$dist\plugins\UI" -Recurse -Force
+
+        # Players
+        if (Test-Path "src/Lively/Lively.Player.Wmf/bin/x64/Release") {
+          Copy-Item -Path "src/Lively/Lively.Player.Wmf/bin/x64/Release/*" -Destination "$dist\plugins\wmf" -Recurse -Force
+        }
+        if (Test-Path "src/Lively/Lively.Player.CefSharp/bin/x64/Release") {
+          Copy-Item -Path "src/Lively/Lively.Player.CefSharp/bin/x64/Release/*" -Destination "$dist\plugins\cef" -Recurse -Force
+        }
+        if (Test-Path "src/Lively/Lively.Player.WebView2/bin/x64/Release") {
+          Copy-Item -Path "src/Lively/Lively.Player.WebView2/bin/x64/Release/*" -Destination "$dist\plugins\webview2" -Recurse -Force
+        }
+        if (Test-Path "src/Lively/Lively.Player.Vlc/bin/x64/Release") {
+          Copy-Item -Path "src/Lively/Lively.Player.Vlc/bin/x64/Release/*" -Destination "$dist\plugins\libvlc" -Recurse -Force
+        }
+
     - name: Upload Built App Artifact
       uses: actions/upload-artifact@v4
       with:
         name: Lively-Wallpaper-Release-x64
-        path: |
-          src/Lively/Lively/bin/x64/Release/
-          src/Lively/Lively.UI.WinUI/bin/x64/Release/
+        path: dist/

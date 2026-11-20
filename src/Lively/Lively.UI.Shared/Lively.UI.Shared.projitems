@@ -21,6 +21,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AppUpdateViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ChooseDisplayViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ControlPanel\ControlPanelViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ControlPanel\LockscreenLayoutViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ControlPanel\ScreensaverLayoutViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ControlPanel\WallpaperLayoutViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CustomiseWallpaperViewModel.cs" />
@@ -37,6 +38,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Settings\AppThemeViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Settings\FindMoreAppsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Settings\SettingsGeneralViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Settings\SettingsLockscreenViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Settings\SettingsPerformanceViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Settings\SettingsScreensaverViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Settings\SettingsSystemViewModel.cs" />
