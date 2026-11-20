@@ -37,6 +37,22 @@ jobs:
         New-Item -ItemType Directory -Force -Path "$dist\plugins\webview2"
         New-Item -ItemType Directory -Force -Path "$dist\plugins\libvlc"
 
+        # Download official package to extract MPV player and default wallpaper bundle
+        $officialUrl = "https://github.com/lively-community/lively/releases/download/v2.2.1.0/lively_setup_x86_full_v2210.exe"
+        $setupPath = "$env:TEMP\lively_official_setup.exe"
+        Invoke-WebRequest -Uri $officialUrl -OutFile $setupPath
+        $officialDir = "$env:TEMP\lively_official"
+        Start-Process -FilePath $setupPath -ArgumentList "/DIR=`"$officialDir`" /VERYSILENT /SUPPRESSMSGBOXES /NORESTART" -Wait
+        
+        # Copy Mpv player & Bundled Wallpapers
+        if (Test-Path "$officialDir\plugins\Mpv") {
+          Copy-Item -Path "$officialDir\plugins\Mpv" -Destination "$dist\plugins" -Recurse -Force
+          Copy-Item -Path "$officialDir\plugins\Mpv" -Destination "$dist\plugins\mpv" -Recurse -Force
+        }
+        if (Test-Path "$officialDir\Bundle") {
+          Copy-Item -Path "$officialDir\Bundle" -Destination "$dist" -Recurse -Force
+        }
+
         # Core Lively files
         Copy-Item -Path "src/Lively/Lively/bin/x64/Release/net9.0-windows10.0.18362.0/*" -Destination "$dist" -Recurse -Force
 

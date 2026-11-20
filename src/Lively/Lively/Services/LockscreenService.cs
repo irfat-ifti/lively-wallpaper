@@ -188,13 +188,24 @@ namespace Lively.Services
                 case LockScreenType.different:
                     try
                     {
-                        var layouts = JsonStorage<List<LockScreenLayoutModel>>.LoadData(Constants.CommonPaths.LockScreenLayoutPath);
-                        arrangement = userSettings.Settings.LockScreenArrangement;
-                        wallpaperLayout = layouts?.Find(x => x.Layout == arrangement)?.Wallpapers;
+                        if (File.Exists(Constants.CommonPaths.LockScreenLayoutPath))
+                        {
+                            var layouts = JsonStorage<List<LockScreenLayoutModel>>.LoadData(Constants.CommonPaths.LockScreenLayoutPath);
+                            arrangement = userSettings.Settings.LockScreenArrangement;
+                            wallpaperLayout = layouts?.Find(x => x.Layout == arrangement)?.Wallpapers;
+                        }
+                        
+                        if (wallpaperLayout == null || wallpaperLayout.Count == 0)
+                        {
+                            wallpaperLayout = userSettings.WallpaperLayout;
+                            arrangement = userSettings.Settings.WallpaperArrangement;
+                        }
                     }
                     catch (Exception ex)
                     {
                         Logger.Error($"Failed to read LockScreen config file: {ex}");
+                        wallpaperLayout = userSettings.WallpaperLayout;
+                        arrangement = userSettings.Settings.WallpaperArrangement;
                     }
                     break;
                 default:
@@ -392,14 +403,12 @@ namespace Lively.Services
 
         private void StartInputListener()
         {
-            rawInput.MouseMoveRaw += RawInput_InputReceived;
             rawInput.MouseDownRaw += RawInput_InputReceived;
             rawInput.KeyboardClickRaw += RawInput_InputReceived;
         }
 
         private void StopInputListener()
         {
-            rawInput.MouseMoveRaw -= RawInput_InputReceived;
             rawInput.MouseDownRaw -= RawInput_InputReceived;
             rawInput.KeyboardClickRaw -= RawInput_InputReceived;
         }
@@ -431,8 +440,15 @@ namespace Lively.Services
                             wallpaperLayout = userSettings.WallpaperLayout;
                             break;
                         case LockScreenType.different:
-                            var layouts = JsonStorage<List<LockScreenLayoutModel>>.LoadData(Constants.CommonPaths.LockScreenLayoutPath);
-                            wallpaperLayout = layouts?.Find(x => x.Layout == userSettings.Settings.LockScreenArrangement)?.Wallpapers;
+                            if (File.Exists(Constants.CommonPaths.LockScreenLayoutPath))
+                            {
+                                var layouts = JsonStorage<List<LockScreenLayoutModel>>.LoadData(Constants.CommonPaths.LockScreenLayoutPath);
+                                wallpaperLayout = layouts?.Find(x => x.Layout == userSettings.Settings.LockScreenArrangement)?.Wallpapers;
+                            }
+                            if (wallpaperLayout == null || wallpaperLayout.Count == 0)
+                            {
+                                wallpaperLayout = userSettings.WallpaperLayout;
+                            }
                             break;
                     }
 
